@@ -1,0 +1,1175 @@
+0) Ordre d'inclusion des paquets
+
+- Tout en théorie.
+- babel.
+
+I) Mise en forme courante
+
+\textbf{Gras}
+\textit{Italique}
+\underline{Souligne}
+\emph{Important}
+
+II) Centrage, alignements
+
+\begin{center}
+	% texte centré
+\end{center}
+
+\begin{flushleft}
+	% texte aligné à gauche
+\end{flushleft}
+
+\begin{flushright}
+	% texte aligné à droite
+\end{flushright}
+
+III) Taille globale des caractères
+
+\documentclass[french, <taille>]{article}
+taille: 10, 11 ou 12 pt
+
+IV) Les listes (non ordonnées, ordonnées, description)
+
+* Liste non ordonnées *
+
+\begin{itemize}
+\item un point
+\item un autre
+...
+\item encore un
+\end{itemize}
+
+* Liste ordonnée *
+
+\begin{enumerate}
+\item un poin
+\item un autre
+...
+\item encore un
+\end{enumerate}
+
+* Liste description *
+
+\begin{description}
+\item[Licence :] diplôme
+\item[Master :] diplôme
+\item[Doctorat :] diplôme
+\end{description}
+
+V) Les commentaires
+
+Ctrl + T => Commente la ligne courante
+Ctrl + U => Décommente la ligne courante
+
+Symbole: %
+
+VI) Les caractères spéciaux
+
+\ début de commande \textbackslash
+{ début d'argument  \{
+} fin d'argument \}
+% commentaire \%
+~ espace insécable \~{}
+$ entrée (et sortie) du mode mathématique \$
+^ exposant (en mode mathématique) \^{}
+_ indice (en mode mathématique) \_
+& séparateur de colonne (dans les tableaux) \&
+# numéro d'argument pour les macros \#
+
+VII) Commandes
+
+* Formalisme *
+
+\textbf{Coucou} % Unique argument
+\textcolor{blue}{Coucou} % Plusieurs arguments 
+
+\document[french]{article} % Argument optionnel unique
+\document[french, 12pt]{article} % Argument optionnel multiple
+
+* Portée *
+
+Plusieurs paragraphes => dans les environnements
+Pas dans en tant qu'argument => préférer les bascules.
+
+* (Commandes portée semi-globales) Bascules / Commutateurs *
+
+\textmd{<texte>} \mdseries % Graisse moyenne en général par défaut
+\textbf{<texte>} \bfseries % gras
+\textup{<texte>} \upshape % droit en général par défaut
+\textit{<texte>} \itshape % italique
+\textsl{<texte>} \slshape % incliné
+\textsc{<texte>} \scshape % petites capitales
+\textrm{<texte>} \rmfamily % lettres romaines par défaut
+\textsf{<texte>} \sffamily % Sans empattement (crochets au bout des lettres)
+\texttt{<texte>} \ttfamilty % Chasse fixe (chaque lettre prend le même espace)
+\textnormal{<texte>} \normalfont
+
+* Limiter effet d'une bascule *
+
+{\<bascule> texte}
+
+VIII) Changement de taille local
+
+\tiny % minuscule
+\scriptsize % indice et exposant
+\footnotesize % note de bas de page
+\small % petit
+\normalsize % taille normale
+\large % grand
+\Large % très grand
+\LARGE % très très grand
+\huge % énorme
+\Huge % très énorme
+
+IX) Les packages
+
+\usepackage{} % sans options
+\usepackage[]{} % avec options
+
+* Package: geometry *
+
+\usepackage[a4paper, landscape]{geometry}
+
+* Package: babel *
+
+\today % Retourne la date du jour
+
+Le package babel est supposé être le dernier chargé sauf:
+
+- eurosym
+- varioref
+- listings
+- datetime
+- hyperref
+- glossaries
+- subcaption
+
+* Babel: documents francophones *
+
+A) Chevrons
+\og chevrons \fg{} 
+ou encore
+
+\usepackage{csquotes}
+\usepackage{babel}
+\enquote{chevrons}
+
+B) Formalisme
+\bsc{<nom d'auteurs>}
+M\up{me} \bsc{de La Fayette}
+
+C) Numéros
+\No
+\Nos
+\no
+\nos
+
+D) Ordinaux
+1\ier{}, 1\iers{}
+1\iere{}, 1\ieres{}
+2\ieme{}, 5\iemes{}
+
+* Babel: documents multilingues *
+\documentclass[english, french]{article}
+\selectlanguage{<langue>}
+
+* Package: eurosym *
+\usepackage{eurosym} % après babel
+
+\euro % symbole
+% Deux variantes avec un espace insécable
+\EUR{<montant>}
+<montant>~\euro{} 
+
+* Package: xcolor *
+\usepackage{xcolor}
+
+\textcolor{couleur}{<texte>}
+\color{<couleur>} % bascule
+\pagecolor{<couleur>} % bascule
+\colorbox{<couleur fond>}{<texte>} 
+\fcolorbox{<coul. bordure}{<couleur fond>}{<texte>}
+
+% Dégradé
+\textcolor{red!0!blue}{<texte>} % Totalement bleu
+\textcolor{red!50!blue}{<texte>} % Violet
+\textcolor{red!100!blue}{<texte>} % Totalement rouge
+
+* Package: multido (Boucles pour répéter des actions) *
+\usepackage{multido, xcolor}
+
+\multido{\i=0+2}{51}{%
+	\textcolor{red!\i!blue}{!i}
+}
+
+X) Titre du document
+\title{<intitulé>}
+\\ % passer à la ligne dans l'intitulé
+
+\author{<auteur>}
+\and % sépare les noms des auteurs
+
+\date{<date explicite>}
+\date{} % PAS DE DATE
+\date{\today} % date du jour équivalent à l'absence de \date
+
+\maketitle % OBLIGATOIRE pour faire apparaître les éléments précédents.
+
+XI) Structuration de document
+Les différentes classes: article, report, book, letter
+
+%Présents dans article, report et book
+\part[<intitulé alternatif>]{<intitulé>}
+\chapter[<intitulé alternatif>]{<intitulé>} % Inextistant pour la classe article
+\section[<intitulé alternatif>]{<intitulé>}
+\subsection[<intitulé alternatif>]{<intitulé>}
+\subsubsection[<intitulé alternatif>]{<intitulé>}
+\paragraph[<intitulé alternatif>]{<intitulé>}
+\subparagraph[<intitulé alternatif>]{<intitulé>}
+
+% Intitulé alternatif utilisé => table des matières et/ou titres courants
+
+* Personnalisation des intitulés (package: sectsty) *
+
+\usepackage{xcolor, sectsty}
+\allsectionsfont{\sffamily}
+\sectionfont{\sffamily\color{blue}} % Toutes les sections seront en bleu.
+
+* Personnalisation des intitulés (package: titlesec) *
+
+% A pour effet de faire un encadré avec le nom de la section a gauche
+%et le titre au centre en grand et gras..
+
+\usepackage{titlesec}
+
+\titleformat{\section} % S'applique au sections (par opportun pour les chaps.)
+[frame] % une des formes prédéfinies
+{\itshape}
+{\filright\small\enspace SECTION \thesection\enspace} % format du n° du titre
+{8pt} % distance hori ou verti entre le n° et le texte du titre
+{\Large\bfseries\filcenter} % Format appliqué au texte du titre
+
+* Table des matières *
+
+\tableofcontents
+
+* Notes de bas de page *
+
+\footnote{<contenu de la note de bas de page>}
+
+* Références croisées *
+
+% Juste après sa commande pour des
+% chapitres, sections, figures etc.
+\label{identifiant} 
+
+% On le fait apparaître
+\ref{identifiant} % numéro de l'objet
+\pageref{identifiant} % numéro de la page
+
+* Fontes à utiliser *
+
+lmodern % Latin Modern
+pxfonts % Palatino
+txfonts % Times
+fourier % Adobe Utopia
+kpfonts % Kp-Fonts
+libertine % Libertine
+ebgaramond-maths % Garamond
+
+XII) Liens hypertextes: package hyperref
+\usepackage{hyperref} % Dernier chargé
+
+% Problèmes de structure charger le package bookmarks avant
+
+% L'option breaklinks effectue la césure des URLs
+% L'option colorlinks affiche les hyperlines en couleur.
+
+\url{<URL>} % Ouvre le navigateur
+\href{<URL>}{<texte>} % Forme simplifiée
+% On peut faire de même pour les fichiers locaux
+
+XIII) Les images
+
+Formats acceptés: PNG, JPG ou PDF
+
+* Inclusion directe *
+\usepackage{graphicx}
+
+\includegraphics[<options>]{<nom du fichier>} % sans l'extension
+
+%Exemple
+\includegraphics[width=1.5cm,height=2cm,scale=0.07,angle=90]{tiger}\hfill % hfill pas forcément nécessaire
+
+* Image flottante *
+
+% Les logos ne doivent pas flotter
+
+\begin{figure}[<placement>] %h(here) t(top) b(bottom), p(page) [ht] par exemple
+	\centering
+	%includegraphics
+	\caption{<légende>}
+	\label{<identifiant>}
+\end{figure}
+
+* Liste des figures *
+
+\listoffigures
+
+* Fixer les liens (Redirige vers le haut de l'image et non la légende) *
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[all]{hypcap} % Avec ce package et cette option
+
+* Sous-figures *
+
+\usepackage{subcaption}
+
+\begin{figure}[<placement>]
+	\centering
+
+	\begin{subfigure}[<alignement vertical>]{<largeur>}
+		\centering
+		%include graphics
+		\caption{<légende>}
+		\label{<identifiant>}
+	\end{subfigure}
+
+	% Autres environnements
+	\caption{<légende>}
+	\label{<identifiant>}
+\end{figure}
+
+% Alignement vertical: c(center) t(top) b(bottom) conseillé
+% Largeur: absolue 4cm ou relative 0.5\linewidth
+
+XIV) Les macros
+
+\newcommand{\<nom de commande>}{<texte ou code valide>}
+
+\newcommand{\dst}{Dostoievski} 
+
+le livre de \dst{} % Pour ne pas avoir à ré-écrire
+
+\newcommand{\dst}{\textcolor{magenta}{Dostoievski}} % En magenta
+
+* Espace maladroit (macros produisant du texte) *
+
+\usepackage{xspace}
+\newcommand{\dst}{Dostoievski\xspace}
+
+* Plusierus arguments *
+\newcommand{\<nom de la commande>}[<nb arg>]{texte}
+% arg [1,9]
+% argument N°i désigné par #i
+
+XV) Les mathématiques
+
+* Packages à utiliser *
+\usepackage{mathtools}
+\usepackage{amssymb}
+
+* Mode ligne (assez court) *
+
+$<formule à placer en ligne>$
+
+* Mode hors texte *
+
+\[
+	<formule à placer hors texte>
+\]
+
+* Formules numérotées (1) (2) ... tout à droite  *
+
+% Passage implicite en mode mathématique !
+% On peut labélliser ces équations par ailleurs !
+\begin{equation} 
+	<formule à numéroter>
+\end{equation}
+
+* Commandes du mode mathématique *
+
+\times % signe multiplier
+\cdot % variante du signe multiplier
+\dots % 3 points
+\neq % not equal
+
+\text{<texte dans une formule mathématque hors texte !>}
+
+* Liste de symboles *
+\lambda
+\Lambda
+\phi
+\varphi
+\Phi
+\pi
+\Pi
+\zeta
+\sigma
+\Sigma
+\infty
+\cos
+\lim
+\ln
+\leq
+\geq
+\leqslant % inf ou ég barres parallèles
+\geqslant  % sup ou ég barres parallèles
+\int % intégrale
+\sum
+\pm % plus ou moins
+\mp % moins ou plus
+\cup % U
+\cap % U à l'envers
+\{
+\}
+\imath % i mathématique
+\jmath % j mathématique
+\forall
+\exists
+
+\Rightarrow
+\Longrightarrow
+\implies % Recommandé
+\Leftrightarrow
+\Longleftrightarrow
+\iff % Recommandé
+\Leftarrow
+\Longleftarrow
+\impliedby % Recommandé
+\rightarrow
+\longrightarrow
+\to % Recommandé
+
+Reconnaissance de commande basé sur le symbole: 
+http://detexify.kirelabs.org/classify.html
+
+* Compositions courantes *
+
+\frac{<numérateur>}{<dénominateur>}
+\sqrt{<radicande>}
+\sqrt[n]{<radicande>}
+
+* Indices et exposants *
+
+_<indice>
+_{<indice>} % si composite
+
+^<indice>
+^{<indice>}
+
+* Quelques opérateurs *
+
+\cos \sin \tan \ln \log \exp \lim \max \min \sup \inf
+\liminf \limsup \ker \dim \det \hom \arg \arccos 
+\arcsin \arctan
+
+Les indices sont placés de manière spécifique avec les opérateurs suivants: \lim \max \min \sup \inf \liminf \limsup \det
+
+* Somme et intégration *
+
+\sum_{<borne inférieure>}^{<borne supérieure>}
+\int_{<borne inférieure>}^{<borne supérieure>}
+
+* Vecteurs *
+
+\vec{u}, \vec{\imath}, \vec{\jmath}
+
+* Vecteurs de meilleur qualité *
+\usepackage{esvect}
+
+\vec{u}, \vv{u}
+\vec{AB} \vv{AB}
+
+* Texte en indice ex: Force extérieure *
+Il faut utiliser \text{ext} !!
+
+* Macros dans le mode maths *
+\newcommand{\Fext}{\vv{F}_{\text{ext}}}
+
+* Les lettres black-board *
+
+\mathbb{<lettre>} % N, Z, Q, R, C ou K
+
+* Lettres calligraphiques *
+\usepackage{mathrsfs}
+\mathscr{<caractère(s) latin(s) majuscule(s)>}
+
+* Formules sur plusieurs lignes *
+
+% Passe directement en mode mathématique
+% L'ajout d'une étoile après l'align désactive la
+% numérotation
+\begin{align} 
+	<membre de gauche>
+	& <symbole> <1er membre de droite> \\
+	& <symbole> <2e membre de droite> \\
+	...
+	& <symbole> <dernier membre de droite>
+\end{align}
+
+* Formules sur plusieurs lignes (distinction des cas) *
+
+\[
+<membre de gauche> <symbole>
+\begin{cases}
+	<1er membre de droite> & <1er cas> \\
+	...
+	<dernier membre de droite> & <dernier cas>
+\end{cases}
+\]
+
+* Formules sur plusieurs lignes sans alignment *
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+
+\begin{multiline} % l'ajout d'une étoile => pas de numérotation
+	<1ère ligne> \\
+	<dernière ligne>
+\end{multiline}
+
+XVI) Les théorèmes
+
+\newtheorem{<nom>}{<titre>}[<compteur>]
+
+Valeurs de compteur: nom des commandes sans \
+% Numérote en fonction des sections par exemple.
+
+Valeurs possibles de nom:
+	- theo: pour les maths
+	- exo: pour un exercice quelconque (pluri-disciplinaire)
+	- xpr: pour une expérience	
+
+\begin{theo}[de Zorn] % Zorn facultatif
+% On peut éventuellement ajouter une référence croisée.
+	Toute fonction dérivable est continue.
+\end{theo}
+
+
+* Personnalisation de la mise en forme *
+
+\usepackage{xcolor}
+\usepackage{ntheorem} % 
+\theoremstyle{plain} % Style: simple
+\theorembodyfont{\normalfont} % Fonte normale
+
+\newtheorem{exo}{Exercice} % Th. avec ces paramètres
+\theoremheaderfont{\color{blue}}
+\newtheorem{defi}{Définition} % Titre de la déf en bleu.
+
+* Personnalisation de la mise en forme exemple exagéré *
+
+\usepackage[thmarks]{ntheorem}
+\usepackage{pifont}
+\theoremstyle{plain}
+\theoremheaderfont{\scshape}
+\theorembodyfont{\normalfont}
+\theoremseparator{~--}
+\theoremprework{\dingline{166}}
+\theorempostwork{\hrule\medbreak}
+\theoremnumbering{Roman}
+\theoremsymbol{\ding{169}}
+\newtheorem{art}{Article}
+
+* Théorème avec le package tcolorbox *
+
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
+\tcbset{fonttitle=\bfseries,separator sign none, description delimiters parenthesis}
+\newtcbtheorem{theo}{Théorème}{colorback=red!5!white,colframe=red!75!black}{}
+
+\begin{theo}{}{}
+	Toute fonction dérivable est continue.
+\end{theo}
+
+XVII) Les listings
+\usepackage{listings} % Après babel !!!
+
+* Insertion directe *
+
+\begin{lstlisting}[<options>]
+	<listing informatique>
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+	print("Hello world")
+\end{lstlisting}
+
+* Options *
+% A préférer plutôt que de passer le tout en options
+% de la commande précédente
+\lstset{<options>} 
+
+% basicstyle avec ttfamily EST OBLIGATOIRE
+\lstset{language=Python, basicstyle=\ttfamily} 
+\begin{lstlisting}
+	...
+\end{lstlisting}
+
+* Importation du listing *
+
+\lstinputlisting[<options>]{<fichier annexe>}
+
+\lstset{keywordstyle=\color{magenta},
+		keywordstyle=[2]\color{orange},
+		commentstyle=\color{gray}\itshape,
+		stringstyle=\color{cyan}}
+\lstinputlisting{facto.py}
+
+* Fragment de code dans du texte *
+
+\lstinline[<options>]<carac><frag><carac>
+
+Le mot clé \lstinline|def| .
+
+* Options intéréssantes (\lstset) *
+
+Numérotation et cadre: \lstset{numbers=left,frame=single}
+Même chose mais moins sérré: \lstset{numbers=left,frame=single,framesep=2pt,aboveskip=1ex}
+
+* Extraction d'un bout de code *
+
+\lstinputlisting[linerange={2-6}]{facto.py}
+
+* Caractères accentués dans les listings *
+
+\usepackage{listingsutf8}
+\lstset{%
+	inputencoding=utf8/latin1,
+	<autres options>
+}
+\lstinputlisting{<fichier>} % Uniquement cette commande
+
+XVIII) Ecriture des nombres et des grandeurs
+
+\usepackage{siunitx}
+
+* Nombres *
+
+\num[<options>]{<nombre>}
+
+\num{1e6} produit 1x10^6
+
+* Locale FR *
+
+Sépateur décimal = le point (peu importe si on a écrit "," ou ".")
+
+Pour utiliser la notation française, il faut utiliser:
+l'option locale=FR
+
+\usepackage[<options>]{siunitx}
+ou
+\sisetup{<options>} % en préambule
+
+* Incertitudes *
+\sisetup{separate-uncertainty}
+
+\num{1.234(5)} % 1,234 +- 0.005
+
+* Angles *
+
+\ang[<options>]{<nombres décimals>}
+\ang[<options>]{<degrés>;<minutes>;<secondes>}
+
+\ang{1;2;3} % 1°2'3"
+
+* Grandeurs *
+
+% Grandeur = nombre x unité
+
+\SI[<options>]{<nombre>}{<unité(s)>}
+
+Dans <unité(s)>:
+	^{<exposant>}
+	_{<indice>}
+
+Séparation des unités:
+	<unité>.<unité>
+
+\SI{10}{kg.m.s^{-2}} 10kgms^-2
+
+Unités qui nécessitent l'usage de commandes:
+\planckbar
+\angstrom
+\ohm
+\celsius
+\micro\gram
+
+Préférer utiliser les commandes en cas de doute.
+
+* Déclartion d'unités personnalisées *
+
+\DeclareSIUnit[<options>]{<unit>}{<symbol>}
+
+\DeclareSIUnit{\kmh}{\km\per\hour}
+\newcommand{\vit}[1]{\SI{#1}{\kmh}} % Combinaison avec une macro
+
+* Pussiances: -1 "par" *
+\per
+
+Modifiable via: \sisetup{per-mode = <mode>}
+
+<mode>: reciprocal (puissance), symbol (slash), fraction
+
+* Puissances de 2 et autres *
+
+% AVEC DES COMMANDES SEULEMENT DANS CE CAS
+
+\square<unité> ou <unité>\squared
+\cubic<unité> ou <unité>\cubed
+\raiseto{<nombre>}<unité> ou <unité>\tothe{<nombre>}
+
+* Unités sans valeurs *
+
+\si[<options>]{unité}
+
+* Multiple des unités *
+
+% < 1
+\yocto y 10^-24
+\zeptoz z 10^-21
+\atto a 10^-18
+\femto f 10^-15
+\pico p 10^-12
+\nano n 10^-9
+\micro u 10^-6
+\milli m 10^-3
+\centi c 10^-2
+\deci d 10^-1
+
+%>1
+\deca da 10^1
+\hecto h 10^2
+\kilo k 10^3
+\mega M 10^6
+\giga G 10^9
+\tera T 10^12
+\peta P 10^15
+\exa E 10^18
+\zetta Z 10^21
+\yotta Y 10^24
+
+* Tableaux de nombres *
+
+\begin{tabular}{|r|} % l:left,r:right,c:center, S avec siunitx (alignés sep décimal)
+	\hline
+	{Valeurs} \\ % Protection des entrées non numériques avec siunitx
+	\hline
+	3876 \\
+	2.345 \\
+	\hline
+\end{tabular}
+
+* Ex: bilan comptable avec des nombres négatifs en rouge *
+
+% La commande \num est appliquée aux entrées des colonnes S
+
+\usepackage{siunitx}
+\sisetup{negative-color=red}
+\begin{tabular}{|S|}
+	\hline
+	{Valeurs} \\
+	\hline
+	2878 \\
+	-90.473 \\
+	\hline
+\end{tabular}
+
+* Unités binaires *
+
+\usepackage[binary-units]{siunitx}
+
+\bit \byte
+% Octet non prévu mais on peut le déclarer
+\DeclareSIUnit{\octet}{o}
+\sisetup{binary-units,per-mode=symbol}
+
+* Multiples binaires *
+
+\sisetup{binary-units}
+
+\kibi Ki 2^10
+\mebi Mi 2^20
+\gibi Gi 2^30
+\tebi Ti 2^40
+\pebi Pi 2^50
+\exbi Ei 2^60
+\zebi Zi 2^70
+\yobi Yi 2^80
+
+XIX) Tableaux
+
+\usepackage{array}
+
+* Syntaxe de base *
+
+\begin{tabular}{<motif du tableau>}
+	<contenu du tableau>
+\end{tabular}
+
+<motif du tableau>:
+	- spécification des colonnes: l(left), c(center), r(right)
+	- séparateur des colonnes: |
+
+<contenu du tableau>:
+	- texte/code latex valide
+	- & pour séparer deux cellules consécutives
+	- \\ pour passer à la ligne suivante
+	- \hline (optionnel) pour générer un trait horizontal sur toute la largeur du tableau
+
+\begin{tabular}{|c|c|l|r}
+	\hline
+	1 & 2 & 3 & 4 \\
+	\hline
+	centrée & centrée & à gauche & à droite
+	\hline
+\end{tabular}
+
+* Ligne partielles *
+
+Filet horizontal qui s'étend sur des dimensions précises
+
+\cline{<n°colonne début>-<n°colonne fin>}
+
+* Fusion de colonnes *
+
+\multicolumn{<nb de colonne(s)>}{<align>}{<texte>}
+
+<align>: spécificateur de colones agrémenté de bordure(s) |
+
+* Fusion de lignes *
+
+\usepackage{multirow}
+\multirow{<nb de lignes>}{<largeur>}{<texte>}
+
+<largeur>: 
+	- * (conseillé ajustement automatique)
+	- une largeur spécifique (ex: 3.2cm)
+
+\begin{tabular}{|c|c|c|c|}\hline
+	\multirow{2}{*}{Coucou} & 2 & 3 & 4 \\\cline{2-4}
+							& 6 & 7 & 8 \\\hline
+\end{tabular}
+
+* Entrées sur plusieurs lignes (overflow dans une cellule)*
+
+% m et b nécessitent l'import du package array.
+
+p{<dimension>} % align. vertical: haut du paragraphe
+m{<dimension>} % align. vertical: milieu du paragraphe
+b{<dimension>} % align. vertical: bas du paragraphe
+
+\begin{tabular}{|l|l|b{5cm}}
+
+* Interfaces graphiques *
+
+http://www.tablesgenerator.com/
+http://truben.no/table/
+
+* Tableaux intégrés aux paragraphes *
+% Comportement de base
+
+Bonjour les amis,
+\begin{tabular}{c}
+je suis un\\
+tableau sur 2 lignes.
+\end{tabular}
+Etonnant, non ?
+
+% Avec le même texte qu'avant
+% le haut du tableau est aligné sur la ligne.
+\begin{tabular}[t]{c} 
+
+% Avec le même texte qu'avant
+% le bas du tableau est aligné sur la ligne.
+\begin{tabular}[b]{c} 
+
+* Tableaux dans des flottants *
+
+\begin{table}[<préférences de placement>]
+	\centering
+	<un tableau> %\begin{tabular}..
+	\caption{<légende>}
+	\label{<identifiant>}
+\end{table}
+
+<préférences de placement>: h(here), t(top), b(bottom), p(page)
+\centering: centre horizontalement le tableau
+<légende> sera ajoutée sous le tableau
+<identifiant> pour les références croisées.
+
+* Sous tableau *
+
+% Système analogue aux sous-figures
+% Usage de l'environnement subtable
+% du package subcaption.
+
+* Tableaux professionnels *
+
+packages:
+	- booktabs:
+		\toprule
+		\midrule
+		\bottomrule
+	- ctable
+
+Exemple:
+
+\usepackage{booktabs}
+\begin{tabular}{cc}
+	$D$ & $u_u$ \\
+	(in) & (in) \\
+	\toprule 
+	5 & 269.8
+	\midrule
+	10 & 421.0
+	\midrule
+	11 & 6402
+	\bottomrule
+\end{tabular}
+
+* Autres fonctionnalités *
+
+Largeur déterminé: packages tabularx et tabulary
+Grande taille: rotation
+	- \rotatebox{90}{...} package graphicx
+	- package rotating
+	- packages rotfloat ou ctable (si tableau flottant)
+Plusieurs pages: supertabular ou longtable ou lxtable
+Couleurs: xcolor
+Numéros de lignes: xcolor
+
+XX) Long documents
+
+% Fichier maitre:
+
+\documentclass[<options>]{<classe>}
+<préambule>
+<commandes d'importations de fichiers esclaves
+\begin{document}
+	<commandes d'importations/inclusion de fichiers esclaves>
+\end{document}
+
+% Fichier esclaves
+
+Ne possède pas:
+	- de \documentclass
+	- env. document
+	- de préambule
+
+% Exemples: macros, tableaux, chapitre
+
+* Commandes d'importation / inclusion *
+
+\input{<fichier.tex>} % importation (voir comme un copier-coller)
+\include{<fichier.tex>} % inclusion
+
+% Tout sauf un chap \input
+% Un chapitre seulement \include
+
+% \frontmatter, \maintmatter et \backmatter en classe Book uniquement !
+
+* Compilations de certains fichiers esclaves seulement *
+
+% Situé avant \documentclass
+% Ou en préambule
+\includeonly{<liste de noms de fichiers>}
+
+% packages import ou chapterfolder à voir
+
+XXI) Courbes
+
+% Représentation de graphiques 2D/3D:
+	% - fonctions
+	% - données (notamment expérimentales)
+
+\usepackage{pgfplots}
+
+% Système cartésien classique (unité cm par défaut.)
+
+\begin{tikzpicture}
+	\begin{axis}
+		% Si le graphique est manquant on obtient un
+		% carré de taille 1x1
+		<graphique>; % POINT VIRGULE OBLIGATOIRE
+	\end{axis}
+\end{tikzpicture}
+
+* Représentation graphiques de fonctions *
+
+% Courbe d'éq. y = 10 - x²
+\addplot {10-x^2};
+
+* Représentation de données expérimentales *
+
+\addplot coordinates {<données>};
+
+<données>:
+	(x1, y1) (x2, y2) ...
+<données>:
+	(x1, y1)
+	(x2, y2)
+	...
+
+* Importation de données externes *
+
+\addplot table[x=<entête x>,y=<entête y>]{<fichier>};
+
+% data1.txt
+# Un commentaire
+% Autre commentaire
+0 1
+1 10
+2 100
+
+% fichier.tex
+\begin{tikzpicture}
+	\begin{axis}
+		\addplot table {data1.txt};
+	\end{axis}
+\end{tikzpicture}
+
+%data2.txt
+Temps Rep1 Rep2
+0      1    1
+1      10   0.1
+2      100  0.01
+
+\begin{tikzpicture}
+	\begin{axis}
+		\addplot table[x=Temps,y=Rep1]
+		{data2.txt};
+	\end{axis}
+\end{tikzpicture}
+
+* Autres graphiques (Options de axis) *
+
+% Nuage de points 
+\begin{axis}[only marks]
+% Diagrammes en rectangles
+\begin{axis}[ybar]
+% Vrai histogrammes (Diagrammes != Histogrammes)
+option hist
+% Echelle
+\begin{axis}[scale=0.5]
+% Petit
+\begin{axis}[tiny]
+% Position des abscisses et des ordonnées
+\begin{axis}[axis x line=bottom, axis y line=left]
+% Labels (titres x et y)
+\begin{axis}[xlabel=Temps,ylabel=Réponse \no 1]
+% Titre du graphe
+\begin{axis}[title=Réponse \no 1]
+
+
+* Echelles logarithmiques *
+
+\begin{tikzpicture}
+	\begin{semilogyaxis}
+		% graphique
+	\end{semilogyaxis}
+\end{tikzpicture}
+
+% semilogxaxis (abscisses)
+% semilogyaxis (ordonnées)
+% loglogaxis (les deux)
+
+* Graphiques 3D *
+
+\addplot3 <données du graphique>
+
+<données du graphique>:
+	- fonction de 2 variables
+	- Lecture:
+		- directe
+		- à partir d'un fichier
+
+% Sous forme de fonctions %
+\begin{tikzpicture}
+	% On peut ajouter l'option colorbar
+	% Pour la barre de couleur
+	\begin{axis} 
+		\addplot3[
+			surf,
+			domain=0:360,
+			samples=40
+		]()
+		{sin(x)*sin(y)};
+	\end{axis}
+\end{tikzpicture}
+
+* Représentation de surfaces *
+% Données sous forme de matrices
+
+%3d-2.dat
+0 0 0
+1 0 0 
+2 0 0
+
+0 1 0
+1 1 0.6
+2 1 0.7
+
+\begin{tikzpicture}
+	\begin{axis}
+		% Option surf pour surfaces planes
+		\addplot3 table {3d-2.dat} 
+	\end{axis}
+\end{tikzpicture}
+
+* Points masqués (fonctions) classique *
+
+\begin{tikzpicture}
+	\begin{axis}
+		% Option supp. smooth pour des courbes lissées.
+		\addplot+[mark=none]
+			{10-x^2};
+	\end{axis}
+\end{tikzpicture}
+
+% On peut aussi ajouter plusieurs fonctions
+
+* Légendes *
+\legend{Réponse \no 2}
+
+% Cas de plusieurs fonctions
+\legend{Réponse \no 1, Réponse \no 2}
+
+
+% Il est plus intéréssant de faire flotter un graphique
+% \caption et listage possible \listoffigures
+
+\begin{figure}
+	\centering
+	<graphe>;
+	\caption{Réponse 1}
+	\label{fig:rep1}
+\end{figure}
+
+* Configuration semi-globale
+
+\pgfplotsset{<réglages>}
+
+% A faire systématiquement
+\pgfplotsset{compat = 1.14} % Version
+
+* Séparateurs décimales à la française *
+
+\pgfplotsset{%
+	/pgf/number format/.cd,
+	use comma,
+	1000 sep = {\,},
+	min exponent for 1000 sep = 4
+}
+
+* Courbes qui s'entrêmelent aux légendes *
+
+\pfgplotsset{%
+	every axis legend/.append style={%
+		at = {(0.5,1.03)},%
+		anchor = south%
+	}
+}
